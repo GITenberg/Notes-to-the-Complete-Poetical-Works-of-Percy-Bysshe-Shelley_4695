@@ -1,0 +1,29 @@
+_repo: Notes-to-the-Complete-Poetical-Works-of-Percy-Bysshe-Shelley_4695
+_version: 0.0.1
+creator:
+  author:
+    agent_name: Shelley, Mary Wollstonecraft
+    aliases:
+    - Shelley, Mary W.
+    - Shelley, Mary Wollstonecraft Godwin
+    birthdate: 1797
+    deathdate: 1851
+    gutenberg_agent_id: '61'
+    url: http://www.gutenberg.org/2009/agents/61
+    wikipedia: http://en.wikipedia.org/wiki/Mary_Wollstonecraft_Shelley
+description: ''
+gutenberg_issued: '2003-11-01'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '4695'
+language: en
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcsh 'Shelley, Percy Bysshe, 1792-1822'
+- !lcsh 'Shelley, Percy Bysshe, 1792-1822 -- Criticism and interpretation'
+- !lcc 'PR'
+- GITenberg
+title: Notes to the Complete Poetical Works of Percy Bysshe Shelley
+url: http://www.gutenberg.org/ebooks/4695
