@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: cwwn3SswEiMycirWO1tvr/yeXWE3BwKSrPGF/c8pDqClI4rcUX84mEi/aZLiupWihAqeW1YCQoDkVfvC8bCIlKE8h3rjxeXqd6QDLq2s8ecwZMxyDlEucPhnb5SknMoykK8s8jBLYksWO7ywNawRYoKE2saoU4XfvW5MuqxOT8KUg+MtIXPXcXUvPt9jyz651zVrhotCzAjPDw7J6XF1HyJlc0ghv8148RXtQPxsOL/MF2Z/esfx7LTtaTOemMwKDq3dnQKDY+f6eEuYLH1eZNKdKmAcnMmck0b5dwtCQ8Yyb7JeHtiyPjwH2/3e2SNlquJQ+pL3uHSfpfNhHovjZgUtYrNxQXtJmWQD/oRClP0PLBNHqyvlfTRI2rhZ3Hwsvg5zfWEYdKIUdsz+MCmFrhoiW0PX24wl232TrOkLeNQlFzSy5M2buLqYCBrWUhL6Kus4lEpfn7tLDIU9u2IBpYIzuB4S6B7YTspi9vZOiylPrsAadow6WtUNuqrjcpWR0P9TWcyfaPkXjuJ0+rcWZevZHQxM/XZSML6Fx1qLT2G5VaYGQb4h6rGKGpPU02IHhzG5qmo911NEwsIhVjwKUv44xjxRBhsAgVF2NbnJCln9hw2DsK1a3hiqbLEUU2bKdqxTrpEYEl/IaxVtDUqmTXoOWSodNBlnokwzVrq515M=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/Notes-to-the-Complete-Poetical-Works-of-Percy-Bysshe-Shelley_4695
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
